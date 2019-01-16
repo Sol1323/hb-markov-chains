@@ -11,10 +11,6 @@ def open_and_read_file(file_path):
     """
 
     file = open(input_path).read()
-
-    
-    
-
     return file
 
 
@@ -53,10 +49,8 @@ def make_chains(text_string):
     for i in range(len(words) - 2):
         key = (words[i], words[i + 1])
         value = words[i + 2]
-
         if key not in chains:
             chains[key] = []
-        
         chains[key].append(value)
     return chains
 
@@ -67,30 +61,21 @@ def make_chains(text_string):
 
 def make_text(chains):
     """Return text from chains."""
-
-    key = choice(list(chains.keys()))
-    
-    value = choice(chains[key])
-    
-
     words = []
-
+    key = choice(list(chains.keys()))
+    words.append(key[0])
+    words.append(key[1])
+  
     while key in chains:
-        
-        words.append(key[0])
-        words.append(key[1])
+  
+        value = choice(chains[key])
         words.append(value)
         key = (key[1],value)
-        value = choice(chains[key])
-        
-         
-            # words.append(first_link_key[0])
-            # words.append(first_link_key[1])
-            
-        return " ".join(words)
+  
+    return " ".join(words)
 
 
-input_path = "green-eggs.txt"
+input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
